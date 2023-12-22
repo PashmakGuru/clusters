@@ -16,7 +16,7 @@ on:
 
 env:
     TF_API_TOKEN: ${{ secrets.TFC_API_TOKEN }}
-    TF_CLOUD_ORGANIZATION: ${{ vars.TFC_ORGANIZATION }}
+    TF_ORGANIZATION: ${{ vars.TFC_ORGANIZATION }}
     TF_PROJECT: clusters
     TF_WORKSPACE: clusters-prod
 jobs:

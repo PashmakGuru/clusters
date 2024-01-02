@@ -1,4 +1,4 @@
-name: Sync Terraform Cloud
+name: "Clusters: Run Terraform"
 on:
   push:
     branches:
@@ -33,7 +33,7 @@ jobs:
         id: upload-configuration
         with:
           workspace: ${{ env.TF_WORKSPACE }}
-          directory: clusters/prod
+          directory: clusters
       -
         name: Create Plan Run
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.1.1

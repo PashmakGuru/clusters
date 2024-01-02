@@ -1,4 +1,4 @@
-name: Cluster Change
+name: "Cluster: Modify JSON Data"
 on:
   workflow_dispatch:
     inputs:

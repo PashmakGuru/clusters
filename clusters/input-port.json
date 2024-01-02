@@ -1,5 +1,10 @@
 {
   "clusters": [
-
+    {
+      "name": "foobarrrrr",
+      "resource_group_name": "kubernetes-solution-foobarrrrr-testing",
+      "resource_group_location": "West US 3",
+      "environment": "testing"
+    }
   ]
 }

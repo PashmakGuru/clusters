@@ -3,10 +3,16 @@ on:
   push:
     branches:
     - 'main'
+    paths:
+    - 'clusters/**'
+    - '.github/workflows/clusters-sync.yaml'
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
     - 'main'
+    paths:
+    - 'clusters/**'
+    - '.github/workflows/clusters-sync.yaml'
 
 env:
     TF_API_TOKEN: ${{ secrets.TFC_API_TOKEN }}

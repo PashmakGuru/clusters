@@ -17,12 +17,11 @@ jobs:
   change:
     name: Change and Push
     runs-on: ubuntu-22.04
-    permissions:
-      contents: write
     steps:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       with:
         fetch-depth: 0
+        token: ${{ secrets.GH_PAT }}
     - name: Modify cluster data
       run: |
         FILE=input-port.json
@@ -50,4 +49,4 @@ jobs:
       uses: actions-js/push@master
       with:
         message: "🅿️ Port Action: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' && 'Add' || 'Delete' }} cluster '${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' && inputs.name || fromJson(inputs.port_payload).payload.entity.identifier }}'\nTriggered by: ${{ fromJson(inputs.port_payload).trigger.by.user.firstName }} ${{ fromJson(inputs.port_payload).trigger.by.user.lastName }}"
-        github_token: ${{ github.token }}
+        github_token: ${{ secrets.GH_PAT }}

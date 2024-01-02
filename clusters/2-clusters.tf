@@ -17,7 +17,7 @@ module "kubernetes_cluster" {
   location = each.value.resource_group_location
 }
 
-resource "port_entity" "this" {
+resource "port-labs_port_entity" "this" {
   for_each = local.clusters
 
   blueprint = "clusters"

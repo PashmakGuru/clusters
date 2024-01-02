@@ -6,7 +6,7 @@ locals {
 }
 
 module "kubernetes_cluster" {
-  for_each = clusters
+  for_each = local.clusters
 
   source  = "app.terraform.io/PashmakGuru/kubernetes-cluster/azure"
   version = "0.0.1-alpha.8"
@@ -17,8 +17,8 @@ module "kubernetes_cluster" {
   location = each.value.resource_group_location
 }
 
-resource "port-labs_port_entity" "this" {
-  for_each = clusters
+resource "port_entity" "this" {
+  for_each = local.clusters
 
   blueprint = "clusters"
   identifier = each.value.name

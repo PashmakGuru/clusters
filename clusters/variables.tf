@@ -10,10 +10,20 @@ variable "azure_client_id" {
 
 variable "azure_client_secret" {
   type        = string
+  sensitive = true
   description = "The client secret (also known as application password) used for authentication with Azure when using a Service Principal."
 }
 
 variable "azure_tenant_id" {
   type        = string
   description = "The tenant ID associated with the Azure subscription. This is used to define the organization within Azure."
+}
+
+variable "port_client_id" {
+  type = string
+}
+
+variable "port_secret" {
+  type = string
+  sensitive = true
 }

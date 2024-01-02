@@ -1,0 +1,31 @@
+name: Cluster Change
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: string
+      region:
+        type: string
+      port_payload:
+        required: true
+        description: Port's payload, including details for who triggered the action and
+          general context (blueprint, run id, etc...)
+        type: string
+jobs:
+  change:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      with:
+        fetch-depth: 0
+    - name: Add new cluster
+      if: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' }}
+      run: |
+        cd clusters
+        JSON=$(jq ".clusters[.clusters | length] |= {\"bbb\": \"bb\"}" input-port.json)
+        echo "$JSON" > input-port.json
+    - name: Commit & Push changes
+      uses: actions-js/push@master
+      with:
+        message: "Port Action: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' && 'Add' || 'Delete' }} cluster: '${{ inputs.name }}'\nTriggered by: ${{ fromJson(inputs.port_payload).trigger.by.user.firstName }} ${{ fromJson(inputs.port_payload).trigger.by.user.lastName }}"
+        github_token: ${{ secrets.GITHUB_TOKEN }}

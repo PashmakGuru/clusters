@@ -46,5 +46,5 @@ jobs:
     - name: Commit & Push changes
       uses: actions-js/push@master
       with:
-        message: "Port Action: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' && 'Add' || 'Delete' }} cluster '${{ inputs.name }}'\nTriggered by: ${{ fromJson(inputs.port_payload).trigger.by.user.firstName }} ${{ fromJson(inputs.port_payload).trigger.by.user.lastName }}"
+        message: "Port Action: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' && 'Add' || 'Delete' }} cluster '${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' && inputs.name || fromJson(inputs.port_payload).payload.entity.identifier }}'\nTriggered by: ${{ fromJson(inputs.port_payload).trigger.by.user.firstName }} ${{ fromJson(inputs.port_payload).trigger.by.user.lastName }}"
         github_token: ${{ github.token }}

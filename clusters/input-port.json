@@ -1,3 +1,9 @@
 {
-  "clusters": []
+  "clusters": [
+    {
+      "name": "test2",
+      "resource_group_name": "kubernetes-solution-test2",
+      "resource_group_location": "East US"
+    }
+  ]
 }

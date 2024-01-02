@@ -36,7 +36,7 @@ jobs:
             \"resource_group_location\": \"${{ inputs.region }}\",
           }" $FILE)
         else
-          JSON=$(jq "del(.clusters[] | select(.name == \"${{ inputs.name }}\"))" $FILE)
+          JSON=$(jq "del(.clusters[] | select(.name == \"${{ fromJson(inputs.port_payload).payload.entity.identifier }}\"))" $FILE)
         fi
 
         echo "$JSON" > $FILE

@@ -22,7 +22,11 @@ jobs:
       if: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' }}
       run: |
         cd clusters
-        JSON=$(jq ".clusters[.clusters | length] |= {\"bbb\": \"bb\"}" input-port.json)
+        JSON=$(jq ".clusters[.clusters | length] |= {
+          \"name\": \"${{ inputs.name }}\",
+          \"resource_group_name\": \"kubernetes-solution-${{ inputs.name }}\",
+          \"resource_group_location\": \"${{ inputs.region }}\",
+        }" input-port.json)
         echo "$JSON" > input-port.json
     - name: Commit & Push changes
       uses: actions-js/push@master

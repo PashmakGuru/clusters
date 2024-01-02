@@ -30,6 +30,12 @@ provider "azurerm" {
   tenant_id = var.azure_tenant_id
 }
 
+provider "azuread" {
+  client_id     = var.azure_client_id
+  client_secret = var.azure_client_secret
+  tenant_id     = var.azure_tenant_id
+}
+
 provider "port-labs" {
   client_id = var.port_client_id
   secret = var.port_secret

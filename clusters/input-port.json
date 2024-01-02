@@ -4,6 +4,12 @@
       "name": "test2",
       "resource_group_name": "kubernetes-solution-test2",
       "resource_group_location": "East US"
+    },
+    {
+      "name": "fasfsaf",
+      "resource_group_name": "kubernetes-solution-fasfsaf-testing",
+      "resource_group_location": "East US",
+      "environment": "testing"
     }
   ]
 }

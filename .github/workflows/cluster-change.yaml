@@ -13,8 +13,10 @@ on:
         type: string
 jobs:
   change:
-    name: Change Clusters
+    name: Change clusters data file
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       with:
@@ -22,15 +24,23 @@ jobs:
     - name: Add new cluster
       if: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' }}
       run: |
+        FILE=input-port.json
         cd clusters
+
+        echo "Previous State:"
+        cat $FILE
+
         JSON=$(jq ".clusters[.clusters | length] |= {
           \"name\": \"${{ inputs.name }}\",
           \"resource_group_name\": \"kubernetes-solution-${{ inputs.name }}\",
           \"resource_group_location\": \"${{ inputs.region }}\",
-        }" input-port.json)
-        echo "$JSON" > input-port.json
+        }" $FILE)
+        echo "$JSON" > $FILE
+
+        echo "New State:"
+        cat $FILE
     - name: Commit & Push changes
       uses: actions-js/push@master
       with:
-        message: "Port Action: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' && 'Add' || 'Delete' }} cluster: '${{ inputs.name }}'\nTriggered by: ${{ fromJson(inputs.port_payload).trigger.by.user.firstName }} ${{ fromJson(inputs.port_payload).trigger.by.user.lastName }}"
+        message: "Port Action: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' && 'Add' || 'Delete' }} cluster '${{ inputs.name }}'\nTriggered by: ${{ fromJson(inputs.port_payload).trigger.by.user.firstName }} ${{ fromJson(inputs.port_payload).trigger.by.user.lastName }}"
         github_token: ${{ github.token }}

@@ -13,7 +13,7 @@ on:
         type: string
 jobs:
   change:
-    name: Change clusters data file
+    name: Change and Push
     runs-on: ubuntu-22.04
     permissions:
       contents: write
@@ -21,8 +21,7 @@ jobs:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       with:
         fetch-depth: 0
-    - name: Add new cluster
-      if: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' }}
+    - name: Modify cluster data
       run: |
         FILE=input-port.json
         cd clusters
@@ -30,11 +29,16 @@ jobs:
         echo "Previous State:"
         cat $FILE
 
-        JSON=$(jq ".clusters[.clusters | length] |= {
-          \"name\": \"${{ inputs.name }}\",
-          \"resource_group_name\": \"kubernetes-solution-${{ inputs.name }}\",
-          \"resource_group_location\": \"${{ inputs.region }}\",
-        }" $FILE)
+        IF [ "${{ fromJson(inputs.port_payload).payload.action.trigger }}" = "CREATE" ]; then
+          JSON=$(jq ".clusters[.clusters | length] |= {
+            \"name\": \"${{ inputs.name }}\",
+            \"resource_group_name\": \"kubernetes-solution-${{ inputs.name }}\",
+            \"resource_group_location\": \"${{ inputs.region }}\",
+          }" $FILE)
+        else
+          JSON=$(jq "del(.clusters[] | select(.name == \"${{ inputs.name }}\"))" $FILE)
+        fi
+
         echo "$JSON" > $FILE
 
         echo "New State:"

@@ -27,7 +27,7 @@ jobs:
       name: Add new cluster
       id: clusters-add
       if: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' }}
-      uses: PashmakGuru/gha-platform-orchestrator/actions/clusters-add
+      uses: PashmakGuru/gha-platform-orchestrator/actions/clusters-add@main
       with:
         config-file: clusters/clusters.json
         name: ${{ inputs.name }}
@@ -37,7 +37,7 @@ jobs:
       name: Delete a cluster
       id: clusters-delete
       if: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'DELETE' }}
-      uses: PashmakGuru/gha-platform-orchestrator/actions/clusters-delete
+      uses: PashmakGuru/gha-platform-orchestrator/actions/clusters-delete@main
       with:
         config-file: clusters/clusters.json
         name: ${{ fromJson(inputs.port_payload).payload.entity.identifier }}

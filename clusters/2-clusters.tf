@@ -18,6 +18,10 @@ module "kubernetes_cluster" {
 }
 
 resource "port_entity" "this" {
+  depends_on = [
+    module.kubernetes_cluster,
+  ]
+
   for_each = local.clusters
 
   provider = port-labs

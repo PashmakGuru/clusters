@@ -1,3 +1,10 @@
 {
-  "clusters": []
+  "clusters": [
+    {
+      "name": "bamboli",
+      "resource_group_name": "cluster-solution-bamboli-testing",
+      "resource_group_location": "East US",
+      "environment": "testing"
+    }
+  ]
 }

@@ -6,6 +6,9 @@ module "front_hub" {
   source  = "app.terraform.io/PashmakGuru/front-hub/azure"
   version = "~> 0.0.1"
 
+  resource_group_name     = "fronthub-production"
+  resource_group_location = "East US"
+
   zones             = local.data.zones
   origin_groups     = local.data.origin_groups
   public_ip_origins = local.data.public_ip_origins

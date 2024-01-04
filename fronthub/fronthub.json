@@ -3,14 +3,6 @@
     {
       "domain": "sadda.com",
       "endpoints": []
-    },
-    {
-      "domain": "test.com",
-      "endpoints": []
-    },
-    {
-      "domain": "below.test",
-      "endpoints": []
     }
   ]
 }

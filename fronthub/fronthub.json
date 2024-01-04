@@ -3,6 +3,10 @@
     {
       "domain": "sadda.com",
       "endpoints": []
+    },
+    {
+      "domain": "test.com",
+      "endpoints": []
     }
   ]
 }

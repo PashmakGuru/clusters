@@ -1,0 +1,11 @@
+{
+  "zones": [
+    "sadda.com",
+    "test.com"
+  ],
+  "origin_groups": null,
+  "public_ip_origins": {},
+  "endpoints": null,
+  "rule_sets": null,
+  "routes": {}
+}

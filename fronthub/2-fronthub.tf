@@ -3,7 +3,7 @@ locals {
 }
 
 module "front_hub" {
-  source  = "app.terraform.io/PashmakGuru/kubernetes-cluster/azure"
+  source  = "app.terraform.io/PashmakGuru/front-hub/azure"
   version = "~> 0.0.1"
 
   zones             = local.data.zones

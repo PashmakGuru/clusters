@@ -1,4 +1,4 @@
-name: "Fronthub: Modify DNS Zone JSON Data"
+name: "Fronthub: Manual Transformation"
 on:
   workflow_dispatch:
 

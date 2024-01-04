@@ -22,7 +22,7 @@ resource "port_entity" "this" {
     module.fronthub,
   ]
 
-  for_each = local.data.zones
+  for_each = toset(local.data.zones)
 
   provider = port-labs
 

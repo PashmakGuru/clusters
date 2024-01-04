@@ -17,3 +17,12 @@ variable "azure_tenant_id" {
   type        = string
   description = "The tenant ID associated with the Azure subscription. This is used to define the organization within Azure."
 }
+
+variable "port_client_id" {
+  type = string
+}
+
+variable "port_secret" {
+  type = string
+  sensitive = true
+}

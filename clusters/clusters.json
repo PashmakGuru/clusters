@@ -1,3 +1,10 @@
 {
-  "clusters": []
+  "clusters": [
+    {
+      "name": "administrator",
+      "resource_group_name": "cluster-solution-administrator-production",
+      "resource_group_location": "West US 3",
+      "environment": "production"
+    }
+  ]
 }

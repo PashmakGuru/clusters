@@ -1,8 +1,20 @@
 terraform {
-  required_providers {
+  required_providers  {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.79.0"
+      version = "3.85.0"
+    }
+    azapi = {
+      source  = "azure/azapi"
+      version = "~>1.5"
+    }
+    azuread = {
+      source = "hashicorp/azuread"
+      version = "2.47.0"
+    }
+    port-labs = {
+      source = "port-labs/port-labs"
+      version = "1.7.1"
     }
   }
   required_version = "~> 1.6.3"
@@ -21,7 +33,25 @@ provider "azurerm" {
 
   # Connection to Azure
   subscription_id = var.azure_subscription_id
-  client_id       = var.azure_client_id
-  client_secret   = var.azure_client_secret
-  tenant_id       = var.azure_tenant_id
+  client_id = var.azure_client_id
+  client_secret = var.azure_client_secret
+  tenant_id = var.azure_tenant_id
+}
+
+provider "azapi" {
+  subscription_id = var.azure_subscription_id
+  client_id = var.azure_client_id
+  client_secret = var.azure_client_secret
+  tenant_id = var.azure_tenant_id
+}
+
+provider "azuread" {
+  client_id     = var.azure_client_id
+  client_secret = var.azure_client_secret
+  tenant_id     = var.azure_tenant_id
+}
+
+provider "port-labs" {
+  client_id = var.port_client_id
+  secret = var.port_secret
 }

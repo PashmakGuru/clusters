@@ -1,8 +1,11 @@
 # Readme for Platform Cloud Resources
 
+[![Clusters: Run Terraform](https://github.com/PashmakGuru/platform-cloud-resources/actions/workflows/clusters-sync.yaml/badge.svg)](https://github.com/PashmakGuru/platform-cloud-resources/actions/workflows/clusters-sync.yaml)
+[![Fronthub: Run Terraform](https://github.com/PashmakGuru/platform-cloud-resources/actions/workflows/fronthub-sync.yaml/badge.svg)](https://github.com/PashmakGuru/platform-cloud-resources/actions/workflows/fronthub-sync.yaml)
+
 ## Overview
 
-This repository is dedicated to managing cloud resources, specifically for Azure, using Terraform. It facilitates cloud-related self-service actions within the internal developer platform (IDP) of [Port](https://getport.io/).
+This repository is dedicated to managing cloud resources, specifically for Azure, using Terraform. It facilitates cloud-related self-service actions within the Internal Developer Platform (IDP) of [Port](https://getport.io/).
 
 ### Capabilities
 - [x] Management of Kubernetes clusters.

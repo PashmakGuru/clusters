@@ -1,6 +1,6 @@
 locals {
   clusters = {
-    for cluster in jsondecode(file("${path.module}/input-port.json")).clusters:
+    for cluster in jsondecode(file("${path.module}/clusters.json")).clusters:
       cluster.name => cluster
   }
 }
@@ -9,7 +9,7 @@ module "kubernetes_cluster" {
   for_each = local.clusters
 
   source  = "app.terraform.io/PashmakGuru/kubernetes-cluster/azure"
-  version = "0.0.1-alpha.8"
+  version = "~> 0.0.2"
 
   name = each.value.name
   environment = each.value.environment

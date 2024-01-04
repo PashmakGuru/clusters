@@ -36,6 +36,14 @@ jobs:
         config-file: fronthub/fronthub.json
         domain: ${{ fromJson(inputs.port_payload).payload.entity.identifier }}
     -
+      name: Transform fronthub config
+      uses: PashmakGuru/gha-platform-orchestrator/actions/fronthub-transform@main
+      with:
+        input-file: fronthub/fronthub.json
+        output-file: fronthub/fronthub.lock.json
+        port-client-id: ${{ secrets.PORT_CLIENT_ID }}
+        port-client-secret: ${{ secrets.PORT_CLIENT_SECRET }}
+    -
       name: Commit & Push changes
       uses: actions-js/push@master
       with:

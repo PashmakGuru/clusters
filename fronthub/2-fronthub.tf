@@ -14,10 +14,28 @@ module "front_hub" {
   routes            = local.data.routes
 }
 
-output "name_servers" {
-  value = module.front_hub.name_servers
+resource "port_entity" "this" {
+  depends_on = [
+    module.front_hub,
+  ]
+
+  for_each = local.data.zones
+
+  provider = port-labs
+
+  blueprint = "dns_zones"
+  identifier = each.key
+  title = each.key
+  teams = ["Platform Engineers"]
+  properties = {
+    array_props = {
+      string_items = {
+        name_servers = module.front_hub.name_servers[each.key]
+      }
+    }
+  }
 }
 
-output "urls" {
-  value = module.front_hub.urls
-}
+# output "urls" {
+#   value = module.front_hub.urls
+# }

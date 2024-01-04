@@ -1,0 +1,43 @@
+name: "Fronthub: Modify JSON Data"
+on:
+  workflow_dispatch:
+    inputs:
+      domain:
+        type: string
+      port_payload:
+        required: true
+        description: Port's payload, including details for who triggered the action and
+          general context (blueprint, run id, etc...)
+        type: string
+jobs:
+  change:
+    name: Change and Push
+    runs-on: ubuntu-22.04
+    steps:
+    -
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GH_PAT }}
+    -
+      name: Add new DNS Zone
+      id: dns-zone-add
+      if: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'CREATE' }}
+      uses: PashmakGuru/gha-platform-orchestrator/actions/fronthub-add-dns-zone@main
+      with:
+        config-file: fronthub/fronthub.json
+        domain: ${{ inputs.domain }}
+    -
+      name: Delete a DNS Zone
+      id: dns-zone-delete
+      if: ${{ fromJson(inputs.port_payload).payload.action.trigger == 'DELETE' }}
+      uses: PashmakGuru/gha-platform-orchestrator/actions/fronthub-delete-dns-zone@main
+      with:
+        config-file: fronthub/fronthub.json
+        domain: ${{ fromJson(inputs.port_payload).payload.entity.identifier }}
+    -
+      name: Commit & Push changes
+      uses: actions-js/push@master
+      with:
+        message: "🅿️ Port Action: ${{ steps.dns-zone-add.outcome == 'success' && 'Add' || 'Delete' }} domain '${{ steps.dns-zone-add.outcome == 'success' && inputs.domain || fromJson(inputs.port_payload).payload.entity.identifier }}'\nTriggered by: ${{ fromJson(inputs.port_payload).trigger.by.user.firstName }} ${{ fromJson(inputs.port_payload).trigger.by.user.lastName }}"
+        github_token: ${{ secrets.GH_PAT }}

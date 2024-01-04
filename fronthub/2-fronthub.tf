@@ -1,12 +1,10 @@
 locals {
-  data = jsondecode(file("${path.module}/input_processed.json"))
+  data = jsondecode(file("${path.module}/fronthub.lock.json"))
 }
 
 module "front_hub" {
-  source = "./../"
-
-  resource_group_name     = "front-hub-solution_example-testing"
-  resource_group_location = "West US"
+  source  = "app.terraform.io/PashmakGuru/kubernetes-cluster/azure"
+  version = "0.0.1-alpha.1"
 
   zones             = local.data.zones
   origin_groups     = local.data.origin_groups

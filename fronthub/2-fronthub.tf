@@ -2,7 +2,7 @@ locals {
   data = jsondecode(file("${path.module}/fronthub.lock.json"))
 }
 
-module "front_hub" {
+module "fronthub" {
   source  = "app.terraform.io/PashmakGuru/front-hub/azure"
   version = "~> 0.0.1"
 
@@ -19,7 +19,7 @@ module "front_hub" {
 
 resource "port_entity" "this" {
   depends_on = [
-    module.front_hub,
+    module.fronthub,
   ]
 
   for_each = local.data.zones
@@ -33,12 +33,12 @@ resource "port_entity" "this" {
   properties = {
     array_props = {
       string_items = {
-        name_servers = module.front_hub.name_servers[each.key]
+        name_servers = module.fronthub.name_servers[each.key]
       }
     }
   }
 }
 
 # output "urls" {
-#   value = module.front_hub.urls
+#   value = module.fronthub.urls
 # }

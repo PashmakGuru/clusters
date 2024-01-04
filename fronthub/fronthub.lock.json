@@ -4,9 +4,9 @@
     "test.com",
     "below.test"
   ],
-  "origin_groups": null,
+  "origin_groups": [],
   "public_ip_origins": {},
-  "endpoints": null,
-  "rule_sets": null,
+  "endpoints": [],
+  "rule_sets": [],
   "routes": {}
 }

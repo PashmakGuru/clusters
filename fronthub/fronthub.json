@@ -7,6 +7,10 @@
     {
       "domain": "test.com",
       "endpoints": []
+    },
+    {
+      "domain": "below.test",
+      "endpoints": []
     }
   ]
 }

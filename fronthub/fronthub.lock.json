@@ -1,7 +1,8 @@
 {
   "zones": [
     "sadda.com",
-    "test.com"
+    "test.com",
+    "below.test"
   ],
   "origin_groups": null,
   "public_ip_origins": {},

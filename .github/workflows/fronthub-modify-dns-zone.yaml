@@ -1,4 +1,4 @@
-name: "Fronthub: Modify JSON Data"
+name: "Fronthub: Modify DNS Zone JSON Data"
 on:
   workflow_dispatch:
     inputs:

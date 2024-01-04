@@ -1,0 +1,28 @@
+name: "Fronthub: Modify DNS Zone JSON Data"
+on:
+  workflow_dispatch:
+
+jobs:
+  change:
+    name: Change and Push
+    runs-on: ubuntu-22.04
+    steps:
+    -
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GH_PAT }}
+    -
+      name: Transform fronthub config
+      uses: PashmakGuru/gha-platform-orchestrator/actions/fronthub-transform@main
+      with:
+        input-file: fronthub/fronthub.json
+        output-file: fronthub/fronthub.lock.json
+        port-client-id: ${{ secrets.PORT_CLIENT_ID }}
+        port-client-secret: ${{ secrets.PORT_CLIENT_SECRET }}
+    -
+      name: Commit & Push changes
+      uses: actions-js/push@master
+      with:
+        message: "Transform fronthub config"
+        github_token: ${{ secrets.GH_PAT }}
